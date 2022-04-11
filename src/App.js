@@ -4,6 +4,7 @@ import Single from './pages/single/Single'
 import New from './pages/new/New'
 import List from './pages/list/List'
 import Login from './pages/login/Login'
+import { productInputs, userInputs } from "./formSource";
 
 
 function App() {
@@ -16,7 +17,12 @@ function App() {
           <Route path="users">
             <Route index element={<List />} />
             <Route path=":userId" element={<Single />} />
-            <Route path="new" element={<New />} />
+            <Route path="new" element={<New title="Create New User" inputs={userInputs} />} />
+          </Route>
+          <Route path="products">
+            <Route index element={<List />} />
+            <Route path=":productId" element={<Single />} />
+            <Route path="new" element={<New title="Create New Product" inputs={productInputs} />} />
           </Route>
         </Route>
       </Routes>
