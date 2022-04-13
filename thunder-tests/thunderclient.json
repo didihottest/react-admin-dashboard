@@ -1,0 +1,40 @@
+[
+  {
+    "_id": "98305be1-5a3f-47f2-822b-5e892d35ef87",
+    "colId": "debc23f2-cbb5-44d2-91f5-72b633b0d512",
+    "containerId": "",
+    "name": "create user",
+    "url": "{{local}}/user/create",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-04-13T13:09:51.015Z",
+    "modified": "2022-04-13T13:37:49.499Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n     \"firstName\": \"30\",\n      \"lastName\": \"xxxxx\",\n      \"email\": \"alif@nugg.com\",\n      \"avatar\": \"https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80\",\n      \"age\": \"18\",\n      \"status\": \"active\",\n      \"phone\": \"0812123123\",\n      \"address\": \"Jalan Palsu, Jakarta Selatan\",\n      \"country\": \"Indonesia\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "6c6a009f-bf13-43b0-aff9-ba76fc4c2c16",
+    "colId": "debc23f2-cbb5-44d2-91f5-72b633b0d512",
+    "containerId": "",
+    "name": "get user list",
+    "url": "{{local}}/user/list",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-04-13T13:56:55.791Z",
+    "modified": "2022-04-13T14:18:44.046Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"pageNumber\":2,\n    \"pageSize\": 20\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]
