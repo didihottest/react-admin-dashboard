@@ -35,7 +35,7 @@ const getUserById = async (req, res, next) => {
   const id = req.params.id
   try {
     const userData = await User.findByPk(id)
-    if (!userToUpdate) {
+    if (!userData) {
       throw new appError(404, "User Not Found")
     }
     res.json({

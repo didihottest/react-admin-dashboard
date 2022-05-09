@@ -1,8 +1,8 @@
 import React from "react";
-import Chart from "../../components/chart/Chart";
-import Navbar from "../../components/navbar/Navbar";
-import Sidebar from "../../components/sidebar/Sidebar";
-import List from "../../components/table/Table";
+import Chart from "../../../components/chart/Chart";
+import Navbar from "../../../components/navbar/Navbar";
+import Sidebar from "../../../components/sidebar/Sidebar";
+import List from "../../../components/table/Table";
 import "./single.scss";
 function Single() {
   return (

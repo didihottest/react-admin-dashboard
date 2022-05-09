@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../../datatablesource";
+import { userColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import Axios from "axios";
-import { API_URL } from "../../../config/url";
+import { API_URL } from "../../config/url";
 
 function Datatable() {
   const [rows, setRows] = useState([]);

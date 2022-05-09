@@ -1,7 +1,7 @@
 import React from "react";
-import Datatable from "../../components/datatable/Datatable";
-import Navbar from "../../components/navbar/Navbar";
-import Sidebar from "../../components/sidebar/Sidebar";
+import Datatable from "../../../components/datatable/Datatable";
+import Navbar from "../../../components/navbar/Navbar";
+import Sidebar from "../../../components/sidebar/Sidebar";
 import "./list.scss";
 
 function List() {

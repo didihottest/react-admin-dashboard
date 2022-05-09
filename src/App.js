@@ -1,11 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import Home from './pages/home/Home'
-import Single from './pages/single/Single'
-import New from './pages/new/New'
-import List from './pages/list/List'
+import SingleUser from './pages/users/single/Single'
+import NewUser from './pages/users/new/New'
+import ListUser from './pages/users/list/List'
 import Login from './pages/login/Login'
 import { productInputs, userInputs } from "./formSource";
+import { ToastContainer } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -15,17 +17,19 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="users">
-            <Route index element={<List />} />
-            <Route path=":userId" element={<Single />} />
-            <Route path="new" element={<New title="Create New User" inputs={userInputs} />} />
+            <Route index element={<ListUser />} />
+            <Route path=":userId" element={<SingleUser />} />
+            <Route path="new" element={<NewUser title="Create New User" inputs={userInputs} />} />
+            <Route path="edit/:userId" element={<NewUser title="Edit User" inputs={userInputs} />} />
           </Route>
-          <Route path="products">
+          {/* <Route path="products">
             <Route index element={<List />} />
             <Route path=":productId" element={<Single />} />
             <Route path="new" element={<New title="Create New Product" inputs={productInputs} />} />
-          </Route>
+          </Route> */}
         </Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
