@@ -31,6 +31,22 @@ const getUserList = async (req, res, next) => {
   }
 }
 
+const getUserAll = async (req, res, next) => {
+  try {
+
+    const userList = await User.findAll({
+
+      order: [['firstName', "asc"]]
+    })
+    res.json({
+      message: "SUCCESS",
+      data: userList
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 const getUserById = async (req, res, next) => {
   const id = req.params.id
   try {
@@ -117,7 +133,7 @@ const deleteUser = async (req, res, next) => {
   const id = req.params.id
   try {
     const userData = await User.findByPk(id)
-    if (!userToUpdate) {
+    if (!userData) {
       throw new appError(404, "User Not Found")
     }
     await userData.destroy()
@@ -141,4 +157,5 @@ module.exports = {
   getUserById,
   getUserList,
   deleteUser,
+  getUserAll
 }

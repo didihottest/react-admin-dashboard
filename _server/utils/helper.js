@@ -93,7 +93,131 @@ const updateUserCondition = (body) => {
   return updateData
 }
 
+const checkBodyProductCreate = (body) => {
+  const {
+    product,
+    img_url,
+    price,
+  } = body
+  if (!product) {
+    throw new appError(400, "Harap Input product")
+  }
+  if (!img_url) {
+    throw new appError(400, "Harap Input img_url")
+  }
+  if (!price) {
+    throw new appError(400, "Harap Input price")
+  }
+
+}
+
+const updateProductCondition = (body) => {
+  const {
+    product,
+    img_url,
+    price, } = body
+
+  const updateData = {}
+
+  if (product) {
+    updateData.product = product
+  }
+
+  if (img_url) {
+    updateData.img_url = img_url
+  }
+
+  if (price) {
+    updateData.price = price
+  }
+
+  return updateData
+}
+
+const checkBodyOrderCreate = (body) => {
+  const {
+    tracking_id,
+    product_uuid,
+    user_uuid,
+    qty,
+    price_qty,
+    total,
+    status,
+    date } = body
+  if (!tracking_id) {
+    throw new appError(400, "Harap Input Tracking ID")
+  }
+  if (!product_uuid) {
+    throw new appError(400, "Harap Input Produk")
+  }
+  if (!user_uuid) {
+    throw new appError(400, "Harap Input User")
+  }
+  if (!qty) {
+    throw new appError(400, "Harap Input qty")
+  }
+  if (!price_qty) {
+    throw new appError(400, "Harap Input price_qty")
+  }
+  if (!total) {
+    throw new appError(400, "Harap Input total")
+  }
+  if (!status) {
+    throw new appError(400, "Harap Input status")
+  }
+  if (!date) {
+    throw new appError(400, "Harap Input date")
+  }
+}
+
+const updateOrderCondition = (body) => {
+  const {
+    tracking_id,
+    product_uuid,
+    user_uuid,
+    qty,
+    price_qty,
+    total,
+    status, } = body
+
+  const updateData = {}
+
+  if (tracking_id) {
+    updateData.tracking_id = tracking_id
+  }
+
+  if (product_uuid) {
+    updateData.product_uuid = product_uuid
+  }
+
+  if (user_uuid) {
+    updateData.user_uuid = user_uuid
+  }
+
+  if (qty) {
+    updateData.qty = qty
+  }
+
+  if (price_qty) {
+    updateData.price_qty = price_qty
+  }
+
+  if (status) {
+    updateData.status = status
+  }
+
+  if (total) {
+    updateData.total = total
+  }
+
+  return updateData
+}
+
 module.exports = {
   checkBodyUserCreate,
-  updateUserCondition
+  updateUserCondition,
+  checkBodyProductCreate,
+  updateProductCondition,
+  checkBodyOrderCreate,
+  updateOrderCondition
 }

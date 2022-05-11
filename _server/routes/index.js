@@ -1,9 +1,13 @@
 const express = require('express')
 const ROUTER = express.Router()
 const userRoutes = require('./user')
+const productRoutes = require('./product')
+const orderRoutes = require('./order')
 
 
 ROUTER.use('/user', userRoutes)
+ROUTER.use('/product', productRoutes)
+ROUTER.use('/order', orderRoutes)
 
 ROUTER.all('*', (req, res, next) => {
   res.status(404).json({

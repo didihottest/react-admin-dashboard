@@ -4,6 +4,7 @@ const userController = require('../api/user')
 
 ROUTER.post('/create', userController.createUser)
 ROUTER.post('/list', userController.getUserList)
+ROUTER.get('/all', userController.getUserAll)
 ROUTER.put('/update/:id', userController.updateUser)
 ROUTER.get('/single/:id', userController.getUserById)
 ROUTER.delete('/delete/:id', userController.deleteUser)

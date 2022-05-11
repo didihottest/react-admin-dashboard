@@ -13,38 +13,27 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function New({ inputs, title }) {
-  const { userId } = useParams();
+  const { productId } = useParams();
   let navigate = useNavigate();
   const [file, setFile] = useState("");
   // console.log(file);
   const [initialValues, setInitialValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    avatar: "",
-    age: "",
-    status: "active",
-    phone: "",
-    address: "",
-    country: "",
+    product: "",
+    img_url: "",
+    price: "",
   });
 
   useEffect(() => {
-    userId &&
-      Axios.get(`${API_URL}/user/single/${userId}`)
+    // lakukan proses get axios hanya ketika product id nya true atau tidak null
+    productId &&
+      Axios.get(`${API_URL}/product/single/${productId}`)
         .then((response) => {
           const apiData = response.data.data;
           setInitialValues((prevState) => {
             return {
-              firstName: apiData.firstName,
-              lastName: apiData.lastName,
-              email: apiData.email,
-              avatar: apiData.avatar,
-              age: apiData.age,
-              status: apiData.status,
-              phone: apiData.phone,
-              address: apiData.address,
-              country: apiData.country,
+              product: apiData.product,
+              img_url: apiData.img_url,
+              price: apiData.price,
             };
           });
         })
@@ -54,9 +43,9 @@ function New({ inputs, title }) {
           } else {
             toast.error("Something Wrong");
           }
-          navigate("/users");
+          navigate("/products");
         });
-  }, [userId]);
+  }, [productId]);
 
   return (
     <div className="new">
@@ -94,21 +83,21 @@ function New({ inputs, title }) {
               //   return errors;
               // }}
               onSubmit={(values) => {
-                // kalau user id dari params nya kosong maka arahkan submit data ke create new user
-                if (!userId) {
-                  Axios.post(`${API_URL}/user/create`, values)
+                // kalau product id dari params nya kosong maka arahkan submit data ke create new product
+                if (!productId) {
+                  Axios.post(`${API_URL}/product/create`, values)
                     .then((response) => {
                       toast.success(response.data.message);
-                      navigate(`/users/${response.data.data.uuid}`);
+                      navigate(`/products/${response.data.data.uuid}`);
                     })
                     .catch((error) => {
                       toast.error(error.response.data.message);
                     });
                 } else {
-                  Axios.put(`${API_URL}/user/update/${userId}`, values)
+                  Axios.put(`${API_URL}/product/update/${productId}`, values)
                     .then((response) => {
                       toast.success(response.data.message);
-                      navigate(`/users/${userId}`);
+                      navigate(`/products/${productId}`);
                     })
                     .catch((error) => {
                       toast.error(error.response.data.message);
@@ -133,111 +122,40 @@ function New({ inputs, title }) {
                       {/* grid item  = col-lg-6 */}
                       <Grid item md={6} sm={12}>
                         <div className="formInput">
-                          <label>First Name</label>
+                          <label>Product Name</label>
                           <input
-                            name="firstName"
+                            name="product"
                             type="text"
-                            placeholder="John"
+                            placeholder="Product Name"
                             onChange={(e) => {
                               // console.log(e.target.value);
-                              setFieldValue("firstName", e.target.value);
+                              setFieldValue("product", e.target.value);
                             }}
-                            value={values.firstName}
+                            value={values.product}
                           />
                         </div>
                       </Grid>
                       <Grid item md={6} sm={12}>
                         <div className="formInput">
-                          <label>Last Name</label>
+                          <label>Image URL</label>
                           <input
-                            name="lastName"
-                            type="text"
-                            placeholder="Doe"
-                            onChange={handleChange}
-                            value={values.lastName}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item md={6} sm={12}>
-                        <div className="formInput">
-                          <label>Email</label>
-                          <input
-                            name="email"
-                            type="text"
-                            placeholder="johndoe@email.com"
-                            onChange={handleChange}
-                            value={values.email}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item md={6} sm={12}>
-                        <div className="formInput">
-                          <label>Avatar</label>
-                          <input
-                            name="avatar"
+                            name="img_url"
                             type="text"
                             placeholder="http://www.imageurl.com"
                             onChange={handleChange}
-                            value={values.avatar}
+                            value={values.img_url}
                           />
                         </div>
                       </Grid>
                       <Grid item md={6} sm={12}>
                         <div className="formInput">
-                          <label>Age</label>
+                          <label>Price</label>
                           <input
-                            name="age"
-                            type="number"
-                            placeholder="23"
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item md={6} sm={12}>
-                        <div className="formInput">
-                          <label>Phone</label>
-                          <input
-                            name="phone"
+                            name="price"
                             type="text"
-                            placeholder="+62 123 123"
-                            value={values.phone}
+                            placeholder="Doe"
                             onChange={handleChange}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item md={6} sm={12}>
-                        <div className="formInput">
-                          <label>Address</label>
-                          <input
-                            name="address"
-                            type="text"
-                            placeholder="Jl. Palsu, Jakarta Barat"
-                            value={values.address}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item md={6} sm={12}>
-                        <div className="formInput">
-                          <label>Country</label>
-                          <input
-                            name="country"
-                            type="text"
-                            placeholder="Indonesia"
-                            onChange={handleChange}
-                            value={values.country}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item md={6} sm={12}>
-                        <div className="formInput">
-                          <label>Status</label>
-                          <input
-                            name="status"
-                            type="text"
-                            placeholder="status"
-                            onChange={handleChange}
-                            value={values.status}
+                            value={values.price}
                           />
                         </div>
                       </Grid>

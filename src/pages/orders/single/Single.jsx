@@ -10,9 +10,9 @@ import { API_URL } from "../../../config/url";
 import { toast } from "react-toastify";
 
 function Single() {
-  const { userId } = useParams();
+  const { orderId } = useParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState({
+  const [order, setOrder] = useState({
     uuid: "",
     firstName: "",
     lastName: "",
@@ -26,11 +26,11 @@ function Single() {
   });
 
   useEffect(() => {
-    userId &&
-      Axios.get(`${API_URL}/user/single/${userId}`)
+    orderId &&
+      Axios.get(`${API_URL}/order/single/${orderId}`)
         .then((response) => {
           const apiData = response.data.data;
-          setUser({
+          setOrder({
             firstName: apiData.firstName,
             lastName: apiData.lastName,
             email: apiData.email,
@@ -49,9 +49,9 @@ function Single() {
           } else {
             toast.error("Something Wrong");
           }
-          navigate("/users");
+          navigate("/orders");
         });
-  }, [userId]);
+  }, [orderId]);
   return (
     <div className="single">
       <Sidebar />
@@ -59,9 +59,9 @@ function Single() {
         <Navbar />
         <div className="top">
           <div className="left">
-            <Link to={`/users/edit/${user.uuid}`}>
+            <Link to={`/orders/edit/${order.uuid}`}>
               <div
-                // onClick={() => navigate(`/users/edit/${user.uuid}`)}
+                // onClick={() => navigate(`/orders/edit/${order.uuid}`)}
                 className="editButton"
               >
                 Edit
@@ -69,32 +69,32 @@ function Single() {
             </Link>
             <div className="title">Information</div>
             <div className="item">
-              <img src={user.avatar} alt="" className="itemImg" />
+              <img src={order.avatar} alt="" className="itemImg" />
               <div className="details">
                 <h1 className="itemTitle">
-                  {user.firstName} {user.lastName}
+                  {order.firstName} {order.lastName}
                 </h1>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">{user.email}</span>
+                  <span className="itemValue">{order.email}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Phone:</span>
-                  <span className="itemValue">{user.phone}</span>
+                  <span className="itemValue">{order.phone}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Address:</span>
-                  <span className="itemValue">{user.address}</span>
+                  <span className="itemValue">{order.address}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Country:</span>
-                  <span className="itemValue">{user.country}</span>
+                  <span className="itemValue">{order.country}</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="right">
-            <Chart aspect={3 / 1} title="User Spending ( Last 6 Months )" />
+            <Chart aspect={3 / 1} title="Order Spending ( Last 6 Months )" />
           </div>
         </div>
         <div className="bottom">

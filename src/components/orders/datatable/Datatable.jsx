@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesource";
-import { Link } from "react-router-dom";
+import { orderColumns, orderRows } from "../../../datatablesource";
+import { Link, useParams } from "react-router-dom";
 import Axios from "axios";
-import { API_URL } from "../../config/url";
+import { API_URL } from "../../../config/url";
+import { toast } from "react-toastify";
 
 function Datatable() {
   const [rows, setRows] = useState([]);
@@ -15,15 +16,29 @@ function Datatable() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const handleDelete = (id) => {
-    setRows((prev) => {
-      const deletedData = prev.filter((item) => item.id !== id);
-      return deletedData;
-    });
+    Axios.delete(`${API_URL}/order/delete/${id}`)
+      .then((response) => {
+        // console.log(response.data.data);
+        toast.success(response.data.message);
+        getOrderList();
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        if (error.response) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Something Wrong");
+        }
+        console.log("====================================");
+        console.log(error);
+        console.log("====================================");
+      });
   };
 
-  const getUserList = () => {
+  const getOrderList = () => {
     setIsLoading(true);
-    Axios.post(`${API_URL}/user/list`, pageState)
+    Axios.post(`${API_URL}/order/list`, pageState)
       .then((response) => {
         // console.log(response.data.data);
         setRows(response.data.data.items);
@@ -39,7 +54,7 @@ function Datatable() {
   };
 
   useEffect(() => {
-    getUserList();
+    getOrderList();
   }, [pageState]);
 
   console.log(totalRows);
@@ -48,8 +63,8 @@ function Datatable() {
     // uuid dihide karena kepanjangan
     // { field: "uuid", headerName: "ID", width: 70 },
     {
-      field: "user",
-      headerName: "User",
+      field: "order",
+      headerName: "Order",
       width: 230,
       renderCell: (params) => {
         return (
@@ -91,7 +106,7 @@ function Datatable() {
         return (
           <div className="cellAction">
             <Link
-              to={`/users/${params.row.uuid}`}
+              to={`/orders/${params.row.uuid}`}
               style={{ textDecoration: "none" }}
             >
               <div className="viewButton">View</div>
@@ -112,8 +127,8 @@ function Datatable() {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Add New User
-        <Link to="/users/new" className="link">
+        Add New Order
+        <Link to="/orders/new" className="link">
           Add New
         </Link>
       </div>

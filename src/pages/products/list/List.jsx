@@ -1,5 +1,5 @@
 import React from "react";
-import Datatable from "../../../components/users/datatable/Datatable";
+import Datatable from "../../../components/products/datatable/Datatable";
 import Navbar from "../../../components/navbar/Navbar";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import "./list.scss";
