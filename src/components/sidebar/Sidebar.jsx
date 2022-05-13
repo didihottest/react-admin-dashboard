@@ -12,8 +12,15 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamIcon from "@mui/icons-material/SettingsSystemDaydream";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 function Sidebar() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    navigate("/login");
+    toast.success("you are logged out");
+    localStorage.removeItem("auth");
+  };
   return (
     <div className="sidebar">
       <div className="top">
@@ -82,7 +89,7 @@ function Sidebar() {
             <AccountCircleIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
+          <li onClick={handleLogout}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>

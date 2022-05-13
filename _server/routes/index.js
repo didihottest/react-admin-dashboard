@@ -3,11 +3,13 @@ const ROUTER = express.Router()
 const userRoutes = require('./user')
 const productRoutes = require('./product')
 const orderRoutes = require('./order')
+const authRoutes = require('./auth')
+const { verifyToken } = require('../api/auth')
 
-
-ROUTER.use('/user', userRoutes)
-ROUTER.use('/product', productRoutes)
-ROUTER.use('/order', orderRoutes)
+ROUTER.use('/auth', authRoutes)
+ROUTER.use('/user', verifyToken, userRoutes)
+ROUTER.use('/product', verifyToken, productRoutes)
+ROUTER.use('/order', verifyToken, orderRoutes)
 
 ROUTER.all('*', (req, res, next) => {
   res.status(404).json({

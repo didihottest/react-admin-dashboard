@@ -38,7 +38,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Login() {
+export default function NotFound() {
   const navigate = useNavigate();
   return (
     <Formik
@@ -80,57 +80,7 @@ export default function Login() {
                   alignItems: "center",
                 }}
               >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                  <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                  Sign in
-                </Typography>
-                <Box sx={{ mt: 1 }}>
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                    onChange={handleChange}
-                  />
-                  <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    onChange={handleChange}
-                  />
-                  <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                  />
-                  <Button
-                    onClick={handleSubmit}
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                  >
-                    Sign In
-                  </Button>
-                  <Grid container>
-                    <Grid item>
-                      <Link to={"/signup"}>
-                        <MaterialLink variant="body2">
-                          {"Don't have an account? Sign Up"}
-                        </MaterialLink>
-                      </Link>
-                    </Grid>
-                  </Grid>
-                </Box>
+                <h1>404 Your Page Is Not Found</h1>
               </Box>
               <Copyright sx={{ mt: 8, mb: 4 }} />
             </Container>
