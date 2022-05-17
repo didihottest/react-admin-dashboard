@@ -9,8 +9,17 @@ import {
   SearchOutlined,
 } from "@mui/icons-material";
 import "./navbar.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../store/index";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const { toggle } = bindActionCreators(actionCreators, dispatch);
+
+  const darkMode = useSelector((state) => {
+    return state.darkMode;
+  });
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -24,7 +33,10 @@ function Navbar() {
             English
           </div>
           <div className="item">
-            <DarkModeOutlined className="icon" />
+            <DarkModeOutlined
+              onClick={() => toggle(darkMode)}
+              className="icon"
+            />
           </div>
           <div className="item">
             <FullscreenExitOutlined className="icon" />

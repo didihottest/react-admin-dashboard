@@ -115,6 +115,7 @@ function Datatable() {
         </Link>
       </div>
       <DataGrid
+        className="datagrid"
         loading={isLoading}
         rows={rows}
         getRowId={(row) => row.uuid}

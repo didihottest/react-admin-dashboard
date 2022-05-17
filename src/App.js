@@ -1,4 +1,5 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
+import './styles/dark.scss'
 import Home from './pages/home/Home'
 import SingleUser from './pages/users/single/Single'
 import NewUser from './pages/users/new/New'
@@ -25,6 +26,7 @@ import PrivateRoute from "./private_routes/PrivateRoute";
 import Axios from 'axios'
 import useAuth from "./utils/auth";
 import NotFound from "./pages/not_found/NotFound";
+import { useSelector } from "react-redux";
 
 function App() {
   const authData = useAuth()
@@ -59,8 +61,12 @@ function App() {
     // Do something with response error
     return Promise.reject(error);
   });
+
+  const darkMode = useSelector((state) => {
+    return state.darkMode
+  })
   return (
-    <div className="App">
+    <div className={darkMode ? "app dark" : "app"}>
       <Routes>
         <Route path="/">
           <Route path="login" element={<Login />} />

@@ -133,6 +133,7 @@ function Datatable() {
         </Link>
       </div>
       <DataGrid
+        className="datagrid"
         loading={isLoading}
         rows={rows}
         getRowId={(row) => row.uuid}
@@ -149,7 +150,7 @@ function Datatable() {
         onPageSizeChange={(pageSize) =>
           setPageState((prev) => ({ ...prev, pageSize }))
         }
-        checkboxSelection
+        // checkboxSelection
       />
     </div>
   );

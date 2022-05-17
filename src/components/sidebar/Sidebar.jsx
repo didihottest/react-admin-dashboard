@@ -14,6 +14,10 @@ import PsychologyIcon from "@mui/icons-material/Psychology";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../store/index";
+
 function Sidebar() {
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -21,6 +25,9 @@ function Sidebar() {
     toast.success("you are logged out");
     localStorage.removeItem("auth");
   };
+
+  const dispatch = useDispatch();
+  const { lightMode, darkMode } = bindActionCreators(actionCreators, dispatch);
   return (
     <div className="sidebar">
       <div className="top">
@@ -96,8 +103,8 @@ function Sidebar() {
         </ul>
       </div>
       <div className="bottom">
-        <div className="colorOption"></div>
-        <div className="colorOption"></div>
+        <div onClick={() => lightMode()} className="colorOption"></div>
+        <div onClick={() => darkMode()} className="colorOption"></div>
       </div>
     </div>
   );
