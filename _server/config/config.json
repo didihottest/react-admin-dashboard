@@ -21,6 +21,6 @@
     "database": "react-dashboard-db",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "port": 5400
+    "port": 5432
   }
 }
