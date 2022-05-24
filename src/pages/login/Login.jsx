@@ -17,7 +17,9 @@ import Axios from "axios";
 import { API_URL } from "../../config/url";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../store/index";
 function Copyright(props) {
   return (
     <Typography
@@ -40,6 +42,8 @@ const theme = createTheme();
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { fullfillUser } = bindActionCreators(actionCreators, dispatch);
   return (
     <Formik
       initialValues={{
@@ -54,6 +58,7 @@ export default function Login() {
           .then((response) => {
             // console.log(response);
             localStorage.setItem("auth", JSON.stringify(response.data.data));
+            fullfillUser(response.data.data);
             navigate("/");
             toast.success("You Are Logged In, Welcome");
           })

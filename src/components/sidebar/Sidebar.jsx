@@ -19,15 +19,18 @@ import { bindActionCreators } from "redux";
 import { actionCreators } from "../../store/index";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const { lightMode, darkMode, clearUser } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const navigate = useNavigate();
   const handleLogout = () => {
+    clearUser();
     navigate("/login");
     toast.success("you are logged out");
     localStorage.removeItem("auth");
   };
-
-  const dispatch = useDispatch();
-  const { lightMode, darkMode } = bindActionCreators(actionCreators, dispatch);
   return (
     <div className="sidebar">
       <div className="top">

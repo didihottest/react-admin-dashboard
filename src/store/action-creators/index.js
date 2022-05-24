@@ -24,3 +24,21 @@ export const toggle = (lastState) => {
     })
   }
 }
+
+export const fullfillUser = (user) => {
+  return (dispatch) => {
+    dispatch({
+      type: "login",
+      payload: user
+    })
+  }
+}
+
+export const clearUser = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "logout",
+      payload: null
+    })
+  }
+}

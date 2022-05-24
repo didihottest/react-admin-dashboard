@@ -28,6 +28,11 @@ import useAuth from "./utils/auth";
 import NotFound from "./pages/not_found/NotFound";
 import { useSelector } from "react-redux";
 
+
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "./store/index";
+
 function App() {
   const authData = useAuth()
   const navigate = useNavigate()
@@ -65,6 +70,14 @@ function App() {
   const darkMode = useSelector((state) => {
     return state.darkMode
   })
+
+  const dispatch = useDispatch();
+  const { fullfillUser } = bindActionCreators(actionCreators, dispatch);
+
+  if (authData) {
+    fullfillUser(authData)
+  }
+
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <Routes>
