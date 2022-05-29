@@ -24,6 +24,6 @@ jobs:
     #   with:
     #     node-version: ${{ matrix.node-version }}
     #     cache: 'npm'
-    - run: cd /home/didi/react-admin-dashboard && git pull && npm install && pm2 restart
+    - run: cd /home/didi/react-admin-dashboard && git pull && npm install && pm2 restart react-fe
     # - run: npm run build --if-present
     # - run: npm test
