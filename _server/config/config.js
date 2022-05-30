@@ -1,3 +1,4 @@
+require('dotenv').config('../.env')
 module.exports = {
   development: {
     username: process.env.DEVELOPMENT_DB_USERNAME,
