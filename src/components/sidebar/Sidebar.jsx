@@ -34,7 +34,7 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="top">
-        <div className="logo">Dashboard</div>
+        <div className="logo">Admin</div>
       </div>
       <hr />
       <div className="center">
