@@ -33,6 +33,8 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "./store/index";
 
+import XLSX from "xlsx";
+
 function App() {
   const authData = useAuth()
   const navigate = useNavigate()
