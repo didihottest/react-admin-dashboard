@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Routes, Route, useNavigate } from "react-router-dom";
 import './styles/dark.scss'
 import Home from './pages/home/Home'

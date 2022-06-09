@@ -11,7 +11,7 @@ const getProductList = async (req, res, next) => {
       pageSize
     } = req.body
 
-    const { limit, offset } = getPagination(pageNumber + 1, pageSize)
+    const { limit, offset } = getPagination(pageNumber, pageSize)
 
     const productList = await Product.findAndCountAll({
       limit: limit,
