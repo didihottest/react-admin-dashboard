@@ -11,6 +11,7 @@ import { API_URL } from "../../../config/url";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
 function New({ inputs, title }) {
   const { productId } = useParams();
@@ -47,6 +48,14 @@ function New({ inputs, title }) {
         });
   }, [productId]);
 
+  const productSchema = Yup.object().shape({
+    price: Yup.number()
+      .min(0, "angka minimal 0")
+      .positive("Tidak Boleh kurang dari 0"),
+    img_url: Yup.string().required("harus input gambar"),
+    product: Yup.string().required("harus input nama produk"),
+  });
+
   return (
     <div className="new">
       <Sidebar />
@@ -71,17 +80,7 @@ function New({ inputs, title }) {
               initialValues={initialValues}
               // supaya ketika ada perubahan initial value, initial valuenya ikut berubah
               enableReinitialize={true}
-              // validate={(values) => {
-              //   const errors = {};
-              //   if (!values.email) {
-              //     errors.email = "Required";
-              //   } else if (
-              //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-              //   ) {
-              //     errors.email = "Invalid email address";
-              //   }
-              //   return errors;
-              // }}
+              validationSchema={productSchema}
               onSubmit={(values) => {
                 // kalau product id dari params nya kosong maka arahkan submit data ke create new product
                 if (!productId) {
@@ -114,7 +113,7 @@ function New({ inputs, title }) {
 
                 /* and other goodies */
               }) => (
-                <form>
+                <Form>
                   {/* {console.log(values)} */}
                   <Box>
                     {/* grid container =  <div className="row"></div> di bootstrap */}
@@ -133,6 +132,12 @@ function New({ inputs, title }) {
                             }}
                             value={values.product}
                           />
+                          <ErrorMessage
+                            name="product"
+                            render={(msg) => (
+                              <div style={{ color: "red" }}>{msg}</div>
+                            )}
+                          />
                         </div>
                       </Grid>
                       <Grid item md={6} sm={12}>
@@ -145,6 +150,12 @@ function New({ inputs, title }) {
                             onChange={handleChange}
                             value={values.img_url}
                           />
+                          <ErrorMessage
+                            name="img_url"
+                            render={(msg) => (
+                              <div style={{ color: "red" }}>{msg}</div>
+                            )}
+                          />
                         </div>
                       </Grid>
                       <Grid item md={6} sm={12}>
@@ -152,10 +163,16 @@ function New({ inputs, title }) {
                           <label>Price</label>
                           <input
                             name="price"
-                            type="text"
-                            placeholder="Doe"
+                            type="number"
+                            placeholder="123"
                             onChange={handleChange}
                             value={values.price}
+                          />
+                          <ErrorMessage
+                            name="price"
+                            render={(msg) => (
+                              <div style={{ color: "red" }}>{msg}</div>
+                            )}
                           />
                         </div>
                       </Grid>
@@ -179,7 +196,7 @@ function New({ inputs, title }) {
                       Send
                     </button>
                   </div>
-                </form>
+                </Form>
               )}
             </Formik>
           </div>
